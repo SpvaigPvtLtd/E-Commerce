@@ -11,6 +11,7 @@ var subcategory = require('./routes/subcategory');
 var services = require('./routes/services');
 var cart = require('./routes/cart');
 var checkout = require('./routes/checkout');
+var vendors = require('./routes/vendors');
 
 
 var app = express();
@@ -32,7 +33,7 @@ app.use('/subcategory',subcategory)
 app.use('/services',services);
 app.use('/cart',cart);
 app.use('/checkout',checkout);
-
+app.use('/vendors',vendors);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
