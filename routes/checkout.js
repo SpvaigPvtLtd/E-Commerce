@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
 
 
 
-  router.post('/all-data',(req,res)=>{
+  router.post('/all',(req,res)=>{
       pool.query(`select * from ${table}`,(err,result)=>{
           if(err) throw err;
           else res.json(result)
