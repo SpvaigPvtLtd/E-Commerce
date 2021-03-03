@@ -4,7 +4,7 @@ var pool = require('./pool')
 var table = 'booking';
 
 
-var todayDate = newdate.toLocaleDateString()
+//var todayDate = newdate.toLocaleDateString()
 
 
 

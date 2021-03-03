@@ -5,6 +5,11 @@ var pool = require('./pool')
 var table = 'subcategory';
 
 
+router.get('/',(req,res)=>{
+    res.render('subcategory')
+})
+
+
 router.post('/insert',upload.single('image'),(req,res)=>{
 	let body = req.body
     body['image'] = req.file.filename;
@@ -28,7 +33,7 @@ router.post('/insert',upload.single('image'),(req,res)=>{
 
 
 
-router.get('/show',(req,res)=>{
+router.get('/all',(req,res)=>{
 	pool.query(`select s.* , 
     (select c.name from category c where c.id = s.categoryid) as categoryname
      from ${table} s `,(err,result)=>{
@@ -95,11 +100,12 @@ router.post('/update_image',upload.single('image'), (req, res) => {
             })
         }
         else {
-            res.json({
-                status:200,
-                type : 'success',
-                description:'successfully update'
-            })
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+            res.redirect('/subcategory')
         }
     })
 })

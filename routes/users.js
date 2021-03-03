@@ -4,7 +4,7 @@ var pool = require('./pool')
 var table = 'users';
 
 
-var todayDate = newdate.toLocaleDateString()
+//var todayDate = newdate.toLocaleDateString()
 
 
 

@@ -2,7 +2,12 @@ var express = require('express');
 var router = express.Router();
 var upload = require('./multer');
 var pool = require('./pool')
-var table = 'vendor';
+var table = 'vendors';
+
+
+router.get('/',(req,res,)=>{
+    res.render('vendors')
+})
 
 
 router.post('/insert',upload.single('image'),(req,res)=>{
@@ -28,8 +33,8 @@ router.post('/insert',upload.single('image'),(req,res)=>{
 
 
 
-router.post('/show',(req,res)=>{
-	pool.query(`select * from ${table} where partner_number = '${req.body.number}'`,(err,result)=>{
+router.get('/all',(req,res)=>{
+	pool.query(`select * from ${table}`,(err,result)=>{
 		if(err) throw err;
         else res.json(result)
 	})
@@ -97,11 +102,12 @@ router.post('/update_image',upload.single('image'), (req, res) => {
             })
         }
         else {
-            res.json({
-                status:200,
-                type : 'success',
-                description:'successfully update'
-            })
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+            res.redirect('/vendors')
         }
     })
 })

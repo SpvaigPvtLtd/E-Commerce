@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 var router = express.Router();
 var pool = require('./pool')
@@ -36,3 +34,7 @@ router.post("/", (req, res) => {
           else res.json(result)
       })
   })
+
+
+
+  module.exports = router;

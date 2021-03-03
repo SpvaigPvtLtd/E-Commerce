@@ -5,6 +5,19 @@ var pool = require('./pool')
 var table = 'category';
 
 
+
+router.get('/',(req,res)=>{
+   res.render('category')
+    
+})
+
+
+router.post('/storeEditId',(req,res)=>{
+    req.session.editStoreId = req.body.id
+    res.send('success')
+})
+
+
 router.post('/insert',upload.single('image'),(req,res)=>{
 	let body = req.body
     body['image'] = req.file.filename;
@@ -22,13 +35,14 @@ router.post('/insert',upload.single('image'),(req,res)=>{
                 type : 'success',
                 description:'successfully added'
             })
+            
         }
 	})
 })
 
 
 
-router.get('/show',(req,res)=>{
+router.get('/all',(req,res)=>{
 	pool.query(`select * from ${table} `,(err,result)=>{
 		if(err) throw err;
         else res.json(result)
@@ -38,8 +52,8 @@ router.get('/show',(req,res)=>{
 
 
 router.get('/delete', (req, res) => {
-    const { id } = req.query
-    pool.query(`delete from ${table} where id = ${id}`, (err, result) => {
+    let body = req.body
+    pool.query(`delete from ${table} where id = ${req.query.id}`, (err, result) => {
         if(err) {
             res.json({
                 status:500,
@@ -73,6 +87,8 @@ router.post('/update', (req, res) => {
                 type : 'success',
                 description:'successfully update'
             })
+
+            
         }
     })
 })
@@ -97,11 +113,13 @@ router.post('/update_image',upload.single('image'), (req, res) => {
             })
         }
         else {
-            res.json({
-                status:200,
-                type : 'success',
-                description:'successfully update'
-            })
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+
+            res.redirect('/category')
         }
     })
 })
