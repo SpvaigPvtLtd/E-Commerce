@@ -5,8 +5,17 @@ var pool = require('./pool')
 var table = 'services';
 
 
+
+router.get('/',(req,res)=>{
+    res.render('services')
+})
+
 router.post('/insert',upload.single('image'),(req,res)=>{
 	let body = req.body
+    let discount = ((+req.body.price)*(+req.body.discount))/100
+    console.log("discount",discount)
+     let net_amount = (req.body.price) - (discount)
+     body['net_amount'] = net_amount
     body['image'] = req.file.filename;
 	pool.query(`insert into ${table} set ?`,body,(err,result)=>{
 		if(err) {
@@ -28,7 +37,7 @@ router.post('/insert',upload.single('image'),(req,res)=>{
 
 
 
-router.get('/show',(req,res)=>{
+router.get('/all',(req,res)=>{
 	pool.query(`select s.* , 
     (select c.name from category c where c.id = s.categoryid) as categoryname,
     (select sub.name from subcategory sub where sub.id = s.subcategoryid) as subcategoryname
@@ -62,6 +71,11 @@ router.get('/delete', (req, res) => {
 
 
 router.post('/update', (req, res) => {
+    let body = req.body
+    let discount = ((+req.body.price)*(+req.body.discount))/100
+    console.log("discount",discount)
+     let net_amount = (req.body.price) - (discount)
+     body['net_amount'] = net_amount
     pool.query(`update ${table} set ? where id = ?`, [req.body, req.body.id], (err, result) => {
         if(err) {
             res.json({
@@ -96,11 +110,12 @@ router.post('/update_image',upload.single('image'), (req, res) => {
             })
         }
         else {
-            res.json({
-                status:200,
-                type : 'success',
-                description:'successfully update'
-            })
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+            res.redirect('/services')
         }
     })
 })

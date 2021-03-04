@@ -1,61 +1,69 @@
 <%- include ('./header.ejs') %>
 
-
 <div class="layout-content">
 
 <div class="container-fluid flex-grow-1 container-p-y">
-<h4 class="font-weight-bold py-3 mb-0">New Vendors</h4>
+<h4 class="font-weight-bold py-3 mb-0">New Subcategory</h4>
 <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
-<li class="breadcrumb-item active">Vendors</li>
+<li class="breadcrumb-item active">Product</li>
 </ol>
 </div>
 
 <div class="card mb-4" id='insertdiv'>
-<h6 class="card-header">Add Vendors  <span style="float: right;"><button type="button" class="btn btn-primary show" id="show">Show</button></span> </h6>
+<h6 class="card-header">Add Product  <span style="float: right;"><button type="button" class="btn btn-primary show" id="show">Show</button></span> </h6>
 
 <div class="card-body">
-<form action="/vendors/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
-<div class="form-row">
-<div class="form-group col-md-6">
-<label class="form-label">Name</label>
-<input type="text" class="form-control" placeholder="Email" name="name">
-<div class="clearfix"></div>
-</div>
-<div class="form-group col-md-6">
-<label class="form-label">Email</label>
-<input type="email" class="form-control" name='email' placeholder="Email">
-<div class="clearfix"></div>
-</div>
-</div>
-
-
-
-<div class="form-row">
-    <div class="form-group col-md-6">
-    <label class="form-label">Mobile Number</label>
-    <input type="number" class="form-control" placeholder="Mobile Number" name="number">
-    <div class="clearfix"></div>
-    </div>
-    <div class="form-group col-md-6">
-    <label class="form-label">Address</label>
-    <input type="text" class="form-control" name='address' placeholder="Address">
-    <div class="clearfix"></div>
-    </div>
-    </div>
+<form action="/services/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
 
 
     <div class="form-row">
-      
-        <div class="form-group col-md-12">
-        <label class="form-label">Agreement</label>
-        <input type="file" class="form-control" name='image' placeholder="Password">
+        <div class="form-group col-md-6">
+        <label class="form-label">Category Name</label>
+        <select class="form-control" placeholder="Email" id="categoryid" name="categoryid"></select>
         <div class="clearfix"></div>
         </div>
-        </div>
 
-       
+
+        <div class="form-group col-md-6">
+            <label class="form-label">Subcategory Name</label>
+            <select class="form-control" placeholder="Email" id="subcategoryid" name="subcategoryid"></select>
+            <div class="clearfix"></div>
+            </div>
+
+        </div>
+        
+
+<div class="form-row">
+<div class="form-group col-md-6">
+<label class="form-label">Name</label>
+<input type="text" class="form-control" placeholder="Name" name="name">
+<div class="clearfix"></div>
+</div>
+<div class="form-group col-md-6">
+<label class="form-label">Image</label>
+<input type="file" class="form-control" name='image' placeholder="Password">
+<div class="clearfix"></div>
+</div>
+</div>
+
+
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+    <label class="form-label">Price</label>
+    <input type="text" class="form-control" placeholder="Price" name="price">
+    <div class="clearfix"></div>
+    </div>
+    <div class="form-group col-md-6">
+    <label class="form-label">Discount</label>
+    <input type="text" class="form-control" name='discount' placeholder="Discount" value="0">
+    <div class="clearfix"></div>
+    </div>
+    </div>
+    
+
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
@@ -69,50 +77,74 @@
 
 <div class="card mb-4" id='editdiv'>
 <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back1" style="margin:10px">Back</button></span>Edit Data</h6>
+
 <div class="card-body">
 
     <form>
         <div class="form-row">
 
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label class="form-label">ID</label>
                 <input type="text" class="form-control" placeholder="Email" id="pid" readonly>
                 <div class="clearfix"></div>
                 </div>
 
-        <div class="form-group col-md-6">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" placeholder="Email" id="pname">
-        <div class="clearfix"></div>
         </div>
-     
-        </div>
-
+        
 
         <div class="form-row">
 
 
-            <div class="form-group col-md-4">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="Email" id="pemail">
+            <div class="form-group col-md-6">
+                <label class="form-label">Category Name</label>
+                <select  class="form-control" placeholder="Email" id="pcategoryid"></select>
                 <div class="clearfix"></div>
                 </div>
 
-        <div class="form-group col-md-4">
-        <label class="form-label">Number</label>
-        <input type="number" class="form-control" placeholder="Email" id="pnumber">
-        <div class="clearfix"></div>
-        </div>
+                <div class="form-group col-md-6">
+                    <label class="form-label">Subcategory Name</label>
+                    <select  class="form-control" placeholder="Email" id="psubcategoryid"></select>
+                    <div class="clearfix"></div>
+                    </div>
+
+      
      
-
-        <div class="form-group col-md-4">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-control" placeholder="Email" id="paddress">
-            <div class="clearfix"></div>
-            </div>
-
         </div>
+
+
+
+
+        
+        <div class="form-row">
+
+
+            <div class="form-group col-md-4">
+                <label class="form-label">Name</label>
+                <input type="text"  class="form-control" placeholder="Name" id="pname"/>
+                <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="form-label">Price</label>
+                    <input type="text"  class="form-control" placeholder="Price" id="pprice"/>
+                    <div class="clearfix"></div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label">Discount</label>
+                        <input type="text"  class="form-control" placeholder="Discount" id="pdiscount"/>
+                        <div class="clearfix"></div>
+                        </div>
+      
+     
+        </div>
+
+
+
+
+
+
         
         
         <button type="button" id='update' class="btn btn-primary">Submit</button>
@@ -126,7 +158,7 @@
 <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back2" style="margin:10px">Back</button></span>Upload Image</h6>
 <div class="card-body">
 
-    <form action="/vendors/update_image" method="POST" enctype="multipart/form-data">
+    <form action="/services/update_image" method="POST" enctype="multipart/form-data">
         <div class="form-row">
    
             <div class="form-group col-md-6">
@@ -189,8 +221,8 @@
 
 <script src="assets/js/demo.js"></script><script src="assets/js/analytics.js"></script>
 
-
-<script src="/javascripts/vendors.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/services.js"></script>
 
 </body>
 

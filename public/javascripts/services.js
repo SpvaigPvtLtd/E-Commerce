@@ -1,13 +1,14 @@
 let categories = []
 let subcategories = []
+let services = []
 
 
-let table = 'subcategory'
+let table = 'services'
 
 $('#show').click(function(){
   
 $.getJSON(`${table}/all`, data => {
-    subcategories = data
+    services = data
     makeTable(data)
     
   
@@ -21,6 +22,19 @@ $.getJSON(`category/all`, data => {
     fillDropDown('categoryid', data, 'Choose Category', 0)
   
 })
+
+
+
+$.getJSON(`/subcategory/all`, data => {
+    subcategories = data
+    fillDropDown('subcategoryid', [], 'Choose Subcategory', 0)
+})
+
+$('#categoryid').change(() => {
+    const filteredData = subcategories.filter(item => item.categoryid == $('#categoryid').val())
+    fillDropDown('subcategoryid', filteredData, 'Choose Subcategory', 0)
+})
+
 
 
 function fillDropDown(id, data, label, selectedid = 0) {
@@ -47,7 +61,11 @@ function makeTable(categories){
 <tr>
 <th>Image</th>
 <th>Category Name</th>
+<th>Subcategory Name</th>
 <th>Name</th>
+<th>Price</th>
+<th>Discount</th>
+<th>Net Price</th>
 <th>Options</th>
 </tr>
 </thead>
@@ -59,7 +77,11 @@ table+=`<tr>
 <img src="/images/${item.image}" class="img-fluid img-radius wid-40" alt="" style="width:50px;height:50px">
 </td>
 <td>${item.categoryname}</td>
+<td>${item.subcategoryname}</td>
 <td>${item.name}</td>
+<td>${item.price}</td>
+<td>${item.discount}</td>
+<td>${item.net_amount}</td>
 <td>
 <a href="#!" class="btn btn-info btn-sm edits" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit </a>
 <a href="#!" class="btn btn-info btn-sm updateimage"  id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit Image </a>
@@ -88,16 +110,28 @@ $('#result').on('click', '.deleted', function() {
 
 
 
+$('#pcategoryid').change(() => {
+    const filteredData = subcategories.filter(item => item.categoryid == $('#pcategoryid').val())
+    fillDropDown('psubcategoryid', filteredData, 'Choose Sub-Category', 0)
+})
+
+
+
 $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
-    const result = subcategories.find(item => item.id == id);
+    const result = services.find(item => item.id == id);
     fillDropDown('pcategoryid', categories, 'Choose Category', result.categoryid)
+    $('#psubcategoryid').append($('<option>').val(result.subcategoryid).text(result.subcategoryname))
+ 
     $('#editdiv').show()
     $('#result').hide()
     $('#insertdiv').hide() 
     $('#pid').val(result.id)
      $('#pname').val(result.name)
      $('#pcategoryid').val(result.categoryid)
+     $('#psubcategoryid').val(result.subcategoryid)
+     $('#pprice').val(result.price)
+     $('#pdiscount').val(result.discount)
    
  })
 
@@ -107,7 +141,7 @@ $('#result').on('click', '.edits', function() {
     const id = $(this).attr('id')
     
 
-    const result = subcategories.find(item => item.id == id);
+    const result = services.find(item => item.id == id);
     $('#peid').val(result.id)
 })
 
@@ -119,6 +153,10 @@ $('#update').click(function(){  //data insert in database
         id: $('#pid').val(),
         name: $('#pname').val(),
         categoryid:$('#pcategoryid').val(),
+        subcategoryid:$('#psubcategoryid').val(),
+        name:$('#pname').val(),
+        price:$('#pprice').val(),
+        discount:$('#pdiscount').val()
        
         }
 
