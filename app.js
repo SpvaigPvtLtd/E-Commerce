@@ -13,6 +13,7 @@ var services = require('./routes/services');
 var cart = require('./routes/cart');
 var checkout = require('./routes/checkout');
 var vendors = require('./routes/vendors');
+var requested = require('./routes/RequestedPayment')
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/services',services);
 app.use('/cart',cart);
 app.use('/checkout',checkout);
 app.use('/vendors',vendors);
+app.use('/requested-payment',requested)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -8,6 +8,10 @@ var table = 'users';
 
 
 
+router.get('/',(req,res)=>{
+    res.render('users')
+})
+
 
 router.post('/signup',(req,res)=>{
     let body = req.body
@@ -80,7 +84,7 @@ router.post('/login',(req,res)=>{
 
 
 
-router.post('/show',(req,res)=>{
+router.get('/all',(req,res)=>{
     pool.query(`select * from ${table} order by id desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
