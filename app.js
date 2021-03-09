@@ -16,6 +16,7 @@ var vendors = require('./routes/vendors');
 var requested = require('./routes/RequestedPayment')
 var admin = require('./routes/admin')
 var orders = require('./routes/booking')
+var delievery_boy = require('./routes/delieveryBoy')
 
 
 var app = express();
@@ -52,6 +53,7 @@ app.use('/vendors',vendors);
 app.use('/requested-payment',requested)
 app.use('/admin',admin)
 app.use('/orders',orders)
+app.use('/delieveryBoy',delievery_boy)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

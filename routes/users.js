@@ -26,7 +26,7 @@ router.get('/all',(req,res)=>{
 })
 
 
-router.get('/wallet-transcations',(req,res)=>{
+router.get('/wallet-transactions',(req,res)=>{
     if(req.session.adminid){
         res.render('wallet_transcations')
      }

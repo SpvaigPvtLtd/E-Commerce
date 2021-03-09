@@ -30,6 +30,28 @@ router.get('/history',(req,res)=>{
 })
 
 
+router.get('/transactions',(req,res)=>{
+    if(req.session.adminid){
+        res.render('order_transcations')
+    }
+    else {
+        res.render('admin_login',{msg:'Please Login First'})
+    }
+  // res.render('category')
+    
+})
+
+
+router.get('/order-transcations-data',(req,res)=>{
+    pool.query(`select * from transcations where type = 'order' order by id desc`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+//transcations
+
+
 router.get('/running-orders',(req,res)=>{
     pool.query(`select b.* ,
     (select v.name from vendors v where v.number = b.partner_number) as vendorname
